@@ -17,7 +17,7 @@ import android.view.animation.LinearInterpolator;
 
 public class BesselLoadingView extends View {
     private static final String TAG = "BesselLoadingView";
-    private static final boolean ISDEBUG = true;
+    private static final boolean ISDEBUG = false;
     private static final int DEFAULT_RADIUS = 80;
     private static final int DEFAULT_DURATION = 1500;
     private static final int DEFAULT_COLOR = 0xff00dddd;
