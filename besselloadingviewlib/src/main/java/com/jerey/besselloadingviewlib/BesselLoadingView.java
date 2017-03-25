@@ -112,11 +112,11 @@ public class BesselLoadingView extends View {
             mRadiusFloat = mRadius * 0.9f;
         }
 
-        mMinDistance =  lenth ;
+        mMinDistance = lenth;
 
         log("mMinDistance " + mMinDistance);
 
-        ValueAnimator valueAnimator = ValueAnimator.ofFloat(mRadius , mWidth - mRadius );
+        ValueAnimator valueAnimator = ValueAnimator.ofFloat(mRadius, mWidth - mRadius);
         valueAnimator.setInterpolator(new LinearInterpolator());
         valueAnimator.setDuration(mDuration);
         valueAnimator.setRepeatMode(ValueAnimator.REVERSE);
@@ -143,25 +143,30 @@ public class BesselLoadingView extends View {
         drawBesselLine(canvas);
     }
 
-
+    /**
+     * 绘制贝塞尔曲线与定点圆变大
+     *
+     * @param canvas
+     */
     private void drawBesselLine(Canvas canvas) {
         float minDis = mMinDistance;
         int minLocation = 0;
         for (int i = 0; i < 3; i++) {
             float dis = Math.abs((mFloatX - mCirclesX[i]));
-            if(dis < minDis){
+            if (dis < minDis) {
                 minDis = dis;
                 minLocation = i;
             }
         }
-       // log("最小距离为 " + minDis + "位置:" + minLocation);
+        // log("最小距离为 " + minDis + "位置:" + minLocation);
         if (minDis < mMinDistance) {
+
             float middleX = (mCirclesX[minLocation] + mFloatX) / 2;
             //绘制上半部分贝塞尔曲线
             mPath.moveTo(mCirclesX[minLocation], mCirClesY + mRadius);
             mPath.quadTo(middleX, mCirClesY, mFloatX, mCirClesY + mRadiusFloat);
 
-            mPath.lineTo(mFloatX,mCirClesY - mRadiusFloat);
+            mPath.lineTo(mFloatX, mCirClesY - mRadiusFloat);
 
             mPath.quadTo(middleX, mCirClesY, mCirclesX[minLocation], mCirClesY - mRadius);
 
@@ -171,7 +176,8 @@ public class BesselLoadingView extends View {
             canvas.drawPath(mPath, mPaint);
             mPath.reset();
             //浮动圆靠近固定圆变大
-            float f = 1 + (minDis / mMinDistance) * 0.2f;
+            float f = 1 + (mMinDistance - minDis * 2) / mMinDistance * 0.2f;
+            log("dis% : " + (mMinDistance - minDis) / mMinDistance + "  f = " + f);
             canvas.drawCircle(mCirclesX[minLocation], mCirClesY, mRadius * f, mPaint);
         }
     }
