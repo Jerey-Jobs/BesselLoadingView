@@ -101,7 +101,10 @@ public class BesselLoadingView extends View {
         for (int i = 0; i < 3; i++) {
             mCirclesX[i] = lenth * (i + 1);
         }
+
+        //计算三个圆心Y坐标
         mCirClesY = mHeight / 2;
+        //三个初始圆的半径
         mRadius = mHeight / 3;
         mRadiusFloat = mRadius * 0.9f;
         log("mCirclesX: " + mCirclesX[0] + "," + mCirclesX[1] + "," + mCirclesX[2] + "  Y: " + mCirClesY);
