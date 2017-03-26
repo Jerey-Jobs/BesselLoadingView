@@ -1,12 +1,13 @@
 # BesselLoadingView
 
+[BesselLoadingView](https://github.com/Jerey-Jobs/BesselLoadingView) is a Bezier curve effect of the loading transition animation. Customize views with canvas.<br>
 [BesselLoadingView](https://github.com/Jerey-Jobs/BesselLoadingView)是一个贝塞尔曲线效果的加载过渡动画。使用canvas绘制的自定义view。
 
 -------------------
-### 效果
+### View/效果
 ![](gif/loadingview.gif)
 
-### 引入
+### import/引入
 
 project's build.gradle (工程下的 build.gradle)
 ``` gradle
@@ -27,7 +28,7 @@ module's build.gradle (模块的build.gradle)
 
 ## Usage/用法
 
-上图效果的layout是这样的.
+The layout of the effect is this. (上图效果的layout是这样的.)
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -75,6 +76,7 @@ module's build.gradle (模块的build.gradle)
 
 ### 编写过程
 
+First we provide three configurable options, color, animation cycle length, radius of the circle (the radius will change according to the size of the set)<br>
 首先我们提供三个可配置选项,分别是颜色,动画周期时长,圆的半径(半径同时会根据设置的大小变化)
 
 ``` xml
@@ -84,7 +86,7 @@ module's build.gradle (模块的build.gradle)
     <attr name="loadingduration" format="integer"></attr>
 </declare-styleable>
 ```
-
+As with the general custom View, we get several custom properties in the constructor<br>
 与一般自定义View一样,我们在构造方法中获取自定义的几个属性,
 
 ``` java
@@ -113,15 +115,19 @@ private void initUI(Context context, AttributeSet attrs) {
 
 ### onMeasure
 
-构造方法里面我们只初始化了一些必要的配置参数, 但是我们的圆与圆之间的距离啊什么的还没初始化,我们在onMeasure中进行初始化一些大小的参数
+Construct the method which we only initialize some of the necessary configuration parameters, but our distance between the circle and the distance ah what is not initialized, we are in the initialization onMeasure some size parameters
 
-我做了比如配置的半径比实际的上下高度还要大的情况下自动缩小啊,等一系列自适应操作.并且默认为
+I have done such as the configuration of the radius than the actual height of the upper and lower even under the circumstances automatically reduced ah, and a series of adaptive operation. And the default
+
+(中文：构造方法里面我们只初始化了一些必要的配置参数, 但是我们的圆与圆之间的距离啊什么的还没初始化,我们在onMeasure中进行初始化一些大小的参数
+
+我做了比如配置的半径比实际的上下高度还要大的情况下自动缩小啊,等一系列自适应操作.并且默认为）
 ```
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
 ```
 
-时,默认大小为480像素宽,100像素高
+width = 480px,height = 100px
 
 ``` java
 @Override
@@ -190,9 +196,13 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
 ### onDraw
 
-接下来重点来了, 我们需要画几个东西, 三个固定圆, 一个浮动圆, 贝塞尔曲线, 固定圆半径变化.
+The next focus comes, we need to draw a few things, three fixed circles, a floating circle, Bezier curve, fixed circle radius change.
 
-在绘制贝塞尔曲线的时候,需要先计算浮动圆离哪个固定圆最近,然后绘制相聚最近的圆的贝塞尔曲线,再计算距离,计算出圆应该变化多大.
+When drawing a Bezier curve, it is necessary to calculate the fixed circle nearest to the fixed circle, and then draw the nearest Bezier curve of the circle, and then calculate the distance to calculate how much the circle should change.
+
+（中文：接下来重点来了, 我们需要画几个东西, 三个固定圆, 一个浮动圆, 贝塞尔曲线, 固定圆半径变化.
+
+在绘制贝塞尔曲线的时候,需要先计算浮动圆离哪个固定圆最近,然后绘制相聚最近的圆的贝塞尔曲线,再计算距离,计算出圆应该变化多大.)
 
 ``` java
     @Override
@@ -246,8 +256,7 @@ protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         }
     }
 ```
-
-**至此，我们的自定义View便OK了， 若有帮助，欢迎star**
+** Now， our custom View is done , if helpful, welcome star ** (**至此，我们的自定义View便OK了， 若有帮助，欢迎star**)
 
 
 ## License
